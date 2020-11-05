@@ -2,7 +2,7 @@ const input = document.querySelector('.search-input');
 const postsContainer = document.getElementById('posts-container');
 const loading = document.querySelector('.loader');
 
-let limit = 3;
+let limit = 5;
 let page = 1;
 
 async function getPosts() {
@@ -14,7 +14,7 @@ async function getPosts() {
 
 async function showPosts() {
   const posts = await getPosts();
-  posts.forEach((post) => {
+  posts.forEach(post => {
     const postEl = document.createElement('div');
     postEl.classList.add('post-container');
     postEl.innerHTML = `
@@ -27,4 +27,25 @@ async function showPosts() {
   // console.log(posts);
 }
 
+function showLoading() {
+  loading.classList.add('show');
+  setTimeout(() => {
+    loading.classList.remove('show');
+    setTimeout(() => {
+      page++;
+      showPosts();
+    }, 400);
+  }, 1000);
+}
+
 showPosts();
+
+window.addEventListener("scroll", function () {
+  const scrollHeight = document.documentElement.scrollHeight;
+  const scrollTop = document.documentElement.scrollTop;
+  const clientHeight = document.documentElement.clientHeight;
+
+  if (scrollTop + clientHeight >= scrollHeight - 10) {
+    showLoading()
+  }
+});
