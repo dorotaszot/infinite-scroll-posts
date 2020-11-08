@@ -27,14 +27,25 @@ async function showPosts() {
   // console.log(posts);
 }
 
+function filterPosts(e) {
+  const word = e.target.value;
+  const title = document.querySelector('.post-title').innerText.toUpperCase;
+  const text = document.querySelector('.post-text').innerText.toUpperCase;
+
+  if (title > -1 || text > -1) {
+    console.log(ok);
+  } else {
+
+  }
+
+}
+
 function showLoading() {
   loading.classList.add('show');
   setTimeout(() => {
-    loading.classList.remove('show');
-    setTimeout(() => {
-      page++;
-      showPosts();
-    }, 400);
+    loading.classList.remove('show')
+    page++;
+    showPosts();
   }, 1000);
 }
 
@@ -45,7 +56,9 @@ window.addEventListener("scroll", function () {
   const scrollTop = document.documentElement.scrollTop;
   const clientHeight = document.documentElement.clientHeight;
 
-  if (scrollTop + clientHeight >= scrollHeight - 10) {
+  if (scrollTop + clientHeight >= scrollHeight - 5) {
     showLoading()
   }
 });
+
+input.addEventListener('input', filterPosts);
