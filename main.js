@@ -28,15 +28,22 @@ async function showPosts() {
 }
 
 function filterPosts(e) {
-  const word = e.target.value;
-  const title = document.querySelector('.post-title').innerText.toUpperCase;
-  const text = document.querySelector('.post-text').innerText.toUpperCase;
+  const word = e.target.value.toUpperCase();
+  const posts = document.querySelectorAll('.post-container');
+  // console.log(posts);
 
-  if (title > -1 || text > -1) {
-    console.log(ok);
-  } else {
+  posts.forEach(post => {
+    const title = post.querySelector('.post-title').innerText.toUpperCase();
+    const text = post.querySelector('.post-text').innerText.toUpperCase();
 
-  }
+
+    if (title.indexOf(word) > -1 || text.indexOf(word) > -1) {
+      post.style.display = 'inline';
+    } else {
+      post.style.display = 'none';
+
+    }
+  });
 
 }
 
